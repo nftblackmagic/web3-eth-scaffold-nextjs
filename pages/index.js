@@ -1,12 +1,13 @@
 // Landing page
 import React from "react";
+import PropTypes from "prop-types";
 import { API_DB, DEFAULT_CONTRACT_ADDRESS } from "../src/config/constant";
 import * as _ from "lodash";
 import { ethers } from "ethers";
-import { useCustomContract } from "../src/hooks/useContract";
+// import { useCustomContract } from "../src/hooks/useContract";
 
 function HomePage(props) {
-  const { chain } = useCustomContract(DEFAULT_CONTRACT_ADDRESS, props.abi);
+  // const { chain } = useCustomContract(DEFAULT_CONTRACT_ADDRESS, props.abi);
 
   return (
     <div>
@@ -15,6 +16,10 @@ function HomePage(props) {
     </div>
   );
 }
+
+HomePage.propTypes = {
+  name: PropTypes.string,
+};
 
 export async function getStaticProps() {
   const abi = await fetch(

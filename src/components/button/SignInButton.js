@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+import React from "react";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import { useCustomSignMessage } from "../../hooks/useSignMessage";
 import { ethers } from "ethers";
@@ -17,6 +19,10 @@ const SignInButton = ({ onClick, children, message }) => {
     chain?.id === Number(process.env.NEXT_PUBLIC_CHAIN_ID)
   );
 
+  async function signCustomMessage() {
+    setSignClick(true);
+  }
+
   const handleClick = () => {
     if (isConnected && address) {
       console.log("chain", process.env.NEXT_PUBLIC_CHAIN_ID);
@@ -24,9 +30,6 @@ const SignInButton = ({ onClick, children, message }) => {
         switchNetwork(
           ethers.utils.hexlify(Number(process.env.NEXT_PUBLIC_CHAIN_ID))
         );
-      }
-      async function signCustomMessage() {
-        setSignClick(true);
       }
       if (signature === "") {
         signCustomMessage();
@@ -57,6 +60,12 @@ const SignInButton = ({ onClick, children, message }) => {
   }, [isSuccess, isError]);
 
   return <button onClick={handleClick}>{children}</button>;
+};
+
+SignInButton.propTypes = {
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+  message: PropTypes.string,
 };
 
 export default SignInButton;

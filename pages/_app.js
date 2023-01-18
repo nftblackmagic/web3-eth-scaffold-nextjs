@@ -9,6 +9,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { SnackbarProvider } from "notistack";
 import NextNProgress from "nextjs-progressbar";
 import Layout from "../src/components/layout/Layout";
+import PropTypes from "prop-types";
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum, goerli],
@@ -50,5 +51,10 @@ function MyApp({ Component, pageProps }) {
     </SnackbarProvider>
   );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.any,
+  pageProps: PropTypes.any,
+};
 
 export default MyApp;
