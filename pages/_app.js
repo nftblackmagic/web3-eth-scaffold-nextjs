@@ -8,6 +8,7 @@ import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { SnackbarProvider } from "notistack";
 import NextNProgress from "nextjs-progressbar";
+import Layout from "../src/components/layout/Layout";
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum, goerli],
@@ -40,8 +41,10 @@ function MyApp({ Component, pageProps }) {
     >
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <NextNProgress />
-          <Component {...pageProps} />
+          <Layout>
+            <NextNProgress />
+            <Component {...pageProps} />
+          </Layout>
         </RainbowKitProvider>
       </WagmiConfig>
     </SnackbarProvider>

@@ -6,65 +6,32 @@ import * as _ from "lodash";
 import { ethers } from "ethers";
 import { useCustomContract } from "../src/hooks/useContract";
 import { useRouter } from "next/router";
-import { useAccount, useSwitchNetwork } from "wagmi";
-import { useCustomSignMessage } from "../src/hooks/useSignMessage";
-import useLocalStorage from "../src/hooks/useLocalStorage";
+import SignInButton from "../src/components/button/SignInButton";
 
 function HomePage(props) {
   const { chain } = useCustomContract(DEFAULT_CONTRACT_ADDRESS, props.abi);
   const router = useRouter();
-  const [message, setMessage] = useState("");
-  const [signClick, setSignClick] = useState(false);
-  const { address, isConnected } = useAccount();
-  const [signature, setSignature] = useLocalStorage("signature", "");
-
-  const { switchNetwork } = useSwitchNetwork();
-  const { data, isError, isSuccess } = useCustomSignMessage(
-    message,
-    signClick,
-    chain?.id === Number(process.env.NEXT_PUBLIC_CHAIN_ID)
-  );
+  const [message, setMessage] = useState("Hello World");
 
   const handleUserClick = () => {
-    console.log("chain", process.env.NEXT_PUBLIC_CHAIN_ID);
-    if (chain.id !== Number(process.env.NEXT_PUBLIC_CHAIN_ID)) {
-      switchNetwork(
-        ethers.utils.hexlify(Number(process.env.NEXT_PUBLIC_CHAIN_ID))
-      );
-    }
-    async function signCustomMessage() {
-      setMessage("Hello world");
-      setSignClick(true);
-    }
-    signCustomMessage();
+    router.push("/user");
   };
-  useEffect(() => {
-    if (isSuccess) {
-      router.push({
-        pathname: "/user",
-      });
-      setSignature(data);
-      console.log("home page signature data", data);
-    }
-    if (isError) {
-      console.log("error", isError);
-    }
-    setMessage("");
-    setSignClick(false);
-  }, [isSuccess, isError]);
+
   return (
     <div>
       <h1>The Home Page</h1>
       <h2>{props.name}</h2>
-      <CustomConnect />
-      <button onClick={handleUserClick}>Go to user page</button>
     </div>
   );
 }
 
 export async function getStaticProps() {
   const abi = await fetch(
-    API_DB + "abi/" + "5" + "/" + DEFAULT_CONTRACT_ADDRESS,
+    API_DB +
+      "abi/" +
+      Number(process.env.NEXT_PUBLIC_CHAIN_ID) +
+      "/" +
+      DEFAULT_CONTRACT_ADDRESS,
     {
       method: "GET",
     }
