@@ -1,21 +1,12 @@
 // Landing page
-import React, { useEffect, useState } from "react";
-import { CustomConnect } from "../src/components/ConnectButton";
+import React from "react";
 import { API_DB, DEFAULT_CONTRACT_ADDRESS } from "../src/config/constant";
 import * as _ from "lodash";
 import { ethers } from "ethers";
 import { useCustomContract } from "../src/hooks/useContract";
-import { useRouter } from "next/router";
-import SignInButton from "../src/components/button/SignInButton";
 
 function HomePage(props) {
   const { chain } = useCustomContract(DEFAULT_CONTRACT_ADDRESS, props.abi);
-  const router = useRouter();
-  const [message, setMessage] = useState("Hello World");
-
-  const handleUserClick = () => {
-    router.push("/user");
-  };
 
   return (
     <div>

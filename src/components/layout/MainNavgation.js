@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import classes from "../../../styles/MainNavgation.module.css";
-import { BasciConnect } from "../ConnectButton";
 import SignInButton from "../button/SignInButton";
 import { useRouter } from "next/router";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const MainNavgation = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ const MainNavgation = () => {
           </SignInButton>
         </li>
       </ul>
-      <BasciConnect />
+      <ConnectButton />
     </nav>
   );
 };
