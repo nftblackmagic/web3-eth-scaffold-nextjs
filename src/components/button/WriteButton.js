@@ -86,6 +86,7 @@ const WriteButton = ({ onClick, children, abi, functionName, value, args }) => {
       <button
         disabled={!write || writeIsLoading || txnIsLoading}
         onClick={handleClick}
+        id="inherit-button"
       >
         {children}
       </button>

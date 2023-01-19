@@ -22,7 +22,7 @@ const MainNavgation = () => {
         </li>
         <li>
           <SignInButton onClick={handleUserClick} message={"Hello world"}>
-            My account
+            My Account
           </SignInButton>
         </li>
       </ul>

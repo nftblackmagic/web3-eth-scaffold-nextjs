@@ -59,7 +59,11 @@ const SignInButton = ({ onClick, children, message }) => {
     setSignClick(false);
   }, [isSuccess, isError]);
 
-  return <button onClick={handleClick}>{children}</button>;
+  return (
+    <button id="inherit-button" onClick={handleClick}>
+      {children}
+    </button>
+  );
 };
 
 SignInButton.propTypes = {
