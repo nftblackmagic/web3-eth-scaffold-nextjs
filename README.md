@@ -6,6 +6,8 @@ A lightweight and minimal starter for building web applications with Next.js.
 
 https://web3-eth-scaffold-nextjs.vercel.app/
 
+中文视频: 【web3+next.js 脚手架！最强生产力工具！拒绝从零开发！】 https://www.bilibili.com/video/BV1Ud4y1V7y2/?share_source=copy_web&vd_source=813a011a1b6536d5861aa9dfd460b658
+
 ## Getting Started
 
 1. Clone the repository: `git clone https://github.com/nftblackmagic/web3-eth-scaffold-nextjs.git`
