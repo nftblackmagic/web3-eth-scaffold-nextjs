@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import WriteButton from "../../src/components/button/WriteButton";
 
@@ -391,5 +392,9 @@ export async function getStaticProps() {
     }, // will be passed to the page component as props
   };
 }
+
+MintPage.propTypes = {
+  abi: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default MintPage;
