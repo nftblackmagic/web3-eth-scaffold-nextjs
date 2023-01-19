@@ -36,14 +36,14 @@ function MyApp({ Component, pageProps }) {
       maxSnack={3}
       autoHideDuration={3000}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "center",
+        vertical: "bottom",
+        horizontal: "right",
       }}
     >
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <Layout>
-            <NextNProgress />
+            <NextNProgress options={{ showSpinner: false }} />
             <Component {...pageProps} />
           </Layout>
         </RainbowKitProvider>

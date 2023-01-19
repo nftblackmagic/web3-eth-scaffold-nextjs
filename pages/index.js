@@ -3,15 +3,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DEFAULT_CONTRACT_ADDRESS } from "../src/config/constant";
 import { ethers } from "ethers";
-// import { useCustomContract } from "../src/hooks/useContract";
 
 function HomePage(props) {
-  // const { chain } = useCustomContract(DEFAULT_CONTRACT_ADDRESS, props.abi);
-
   return (
-    <div>
+    <div id="mainContainer">
       <h1>The Home Page</h1>
-      <h2>{props.name}</h2>
+      <h2>{`The static props value from contract: ${props.name}`}</h2>
     </div>
   );
 }
@@ -22,7 +19,15 @@ HomePage.propTypes = {
 
 export async function getStaticProps() {
   const abi = [
-    { inputs: [], stateMutability: "nonpayable", type: "constructor" },
+    {
+      inputs: [
+        { internalType: "uint256", name: "maxBatchSize_", type: "uint256" },
+        { internalType: "uint256", name: "collectionSize_", type: "uint256" },
+        { internalType: "uint256", name: "amountForDevs_", type: "uint256" },
+      ],
+      stateMutability: "nonpayable",
+      type: "constructor",
+    },
     { inputs: [], name: "ApprovalCallerNotOwnerNorApproved", type: "error" },
     { inputs: [], name: "ApprovalQueryForNonexistentToken", type: "error" },
     { inputs: [], name: "BalanceQueryForZeroAddress", type: "error" },
@@ -120,19 +125,6 @@ export async function getStaticProps() {
       anonymous: false,
       inputs: [
         {
-          indexed: false,
-          internalType: "uint8",
-          name: "version",
-          type: "uint8",
-        },
-      ],
-      name: "Initialized",
-      type: "event",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
           indexed: true,
           internalType: "address",
           name: "previousOwner",
@@ -170,8 +162,8 @@ export async function getStaticProps() {
     },
     {
       inputs: [],
-      name: "_baseURI",
-      outputs: [{ internalType: "string", name: "", type: "string" }],
+      name: "amountForDevs",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
       stateMutability: "view",
       type: "function",
     },
@@ -215,17 +207,6 @@ export async function getStaticProps() {
     },
     {
       inputs: [
-        { internalType: "string", name: "name_", type: "string" },
-        { internalType: "string", name: "symbol_", type: "string" },
-        { internalType: "uint256", name: "collectionSize_", type: "uint256" },
-      ],
-      name: "initialize",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
         { internalType: "address", name: "owner", type: "address" },
         { internalType: "address", name: "operator", type: "address" },
       ],
@@ -236,8 +217,15 @@ export async function getStaticProps() {
     },
     {
       inputs: [],
-      name: "isMintOn",
+      name: "isPublicSaleOn",
       outputs: [{ internalType: "bool", name: "", type: "bool" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "maxPerAddressDuringMint",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
       stateMutability: "view",
       type: "function",
     },
@@ -250,21 +238,15 @@ export async function getStaticProps() {
     },
     {
       inputs: [],
-      name: "mintInfo",
-      outputs: [
-        { internalType: "uint256", name: "startTime", type: "uint256" },
-        { internalType: "uint256", name: "endTime", type: "uint256" },
-        { internalType: "uint256", name: "maxAvailable", type: "uint256" },
-        { internalType: "uint256", name: "purchaseLimit", type: "uint256" },
-        { internalType: "uint256", name: "price", type: "uint256" },
-      ],
+      name: "name",
+      outputs: [{ internalType: "string", name: "", type: "string" }],
       stateMutability: "view",
       type: "function",
     },
     {
-      inputs: [],
-      name: "name",
-      outputs: [{ internalType: "string", name: "", type: "string" }],
+      inputs: [{ internalType: "address", name: "minter", type: "address" }],
+      name: "numberMinted",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
       stateMutability: "view",
       type: "function",
     },
@@ -283,51 +265,10 @@ export async function getStaticProps() {
       type: "function",
     },
     {
-      inputs: [{ internalType: "address", name: "", type: "address" }],
-      name: "register",
-      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
       inputs: [],
       name: "renounceOwnership",
       outputs: [],
       stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "reveal",
-      outputs: [{ internalType: "bool", name: "", type: "bool" }],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "royaltyAddress",
-      outputs: [{ internalType: "address", name: "", type: "address" }],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        { internalType: "uint256", name: "_tokenId", type: "uint256" },
-        { internalType: "uint256", name: "_salePrice", type: "uint256" },
-      ],
-      name: "royaltyInfo",
-      outputs: [
-        { internalType: "address", name: "", type: "address" },
-        { internalType: "uint256", name: "", type: "uint256" },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "royaltyPercent",
-      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-      stateMutability: "view",
       type: "function",
     },
     {
@@ -354,6 +295,16 @@ export async function getStaticProps() {
       type: "function",
     },
     {
+      inputs: [],
+      name: "saleConfig",
+      outputs: [
+        { internalType: "uint32", name: "publicSaleStartTime", type: "uint32" },
+        { internalType: "uint64", name: "publicPriceWei", type: "uint64" },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
       inputs: [
         { internalType: "address", name: "operator", type: "address" },
         { internalType: "bool", name: "approved", type: "bool" },
@@ -364,10 +315,7 @@ export async function getStaticProps() {
       type: "function",
     },
     {
-      inputs: [
-        { internalType: "string", name: "baseURI", type: "string" },
-        { internalType: "bool", name: "_reveal", type: "bool" },
-      ],
+      inputs: [{ internalType: "string", name: "baseURI", type: "string" }],
       name: "setBaseURI",
       outputs: [],
       stateMutability: "nonpayable",
@@ -375,31 +323,10 @@ export async function getStaticProps() {
     },
     {
       inputs: [
-        { internalType: "uint256", name: "royaltyPercentage", type: "uint256" },
+        { internalType: "uint64", name: "publicPriceWei", type: "uint64" },
+        { internalType: "uint32", name: "publicSaleStartTime", type: "uint32" },
       ],
-      name: "setRoyaltyPercentage",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        { internalType: "address", name: "royaltyReceiver", type: "address" },
-      ],
-      name: "setRoyaltyReceiver",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        { internalType: "uint256", name: "_startTime", type: "uint256" },
-        { internalType: "uint256", name: "_endTime", type: "uint256" },
-        { internalType: "uint256", name: "_maxAvailable", type: "uint256" },
-        { internalType: "uint256", name: "_purchaseLimit", type: "uint256" },
-        { internalType: "uint256", name: "_price", type: "uint256" },
-      ],
-      name: "setupMintInfo",
+      name: "setupNonAuctionSaleInfo",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",

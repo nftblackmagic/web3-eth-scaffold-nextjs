@@ -14,7 +14,7 @@ const UserContainer = () => {
     }
   }, []);
   return (
-    <div>
+    <div id="mainContainer">
       <h1>The User Page</h1>
     </div>
   );

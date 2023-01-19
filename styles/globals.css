@@ -40,3 +40,16 @@ button {
   padding: 0.5rem 1rem;
   font-weight: bold;
 }
+
+#children {
+  all: inherit;
+}
+
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+}
