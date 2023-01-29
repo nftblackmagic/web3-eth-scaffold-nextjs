@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/globals.css";
+import "../../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
@@ -8,7 +8,7 @@ import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { SnackbarProvider } from "notistack";
 import NextNProgress from "nextjs-progressbar";
-import Layout from "../src/components/layout/Layout";
+import Layout from "../components/layout/Layout";
 import PropTypes from "prop-types";
 
 const { chains, provider } = configureChains(

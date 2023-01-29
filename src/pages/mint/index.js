@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
-import WriteButton from "../../src/components/button/WriteButton";
-import { ABI } from "../../src/config/constant";
+import WriteButton from "../../components/button/WriteButton";
+import { ABI } from "../../config/constant";
 
 const MintPage = (props) => {
   return (

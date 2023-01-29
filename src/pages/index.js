@@ -1,7 +1,7 @@
 // Landing page
 import React from "react";
 import PropTypes from "prop-types";
-import { ABI, DEFAULT_CONTRACT_ADDRESS } from "../src/config/constant";
+import { ABI, DEFAULT_CONTRACT_ADDRESS } from "../config/constant";
 import { ethers } from "ethers";
 
 function HomePage(props) {
