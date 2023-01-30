@@ -57,3 +57,36 @@ button {
 #inherit-button {
   font: inherit;
 }
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+#chat-history-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  width: 600px;
+  border: 1px solid #00000020;
+  border-radius: 10px;
+  padding: 20px 40px;
+  height: 60vh;
+  overflow: scroll;
+}
+
+#chat-input {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
