@@ -3,7 +3,7 @@ import "../../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
+import { mainnet, polygon, optimism, arbitrum, goerli,bsc,bscTestnet } from "wagmi/chains";
 import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { SnackbarProvider } from "notistack";
@@ -12,7 +12,7 @@ import Layout from "../components/layout/Layout";
 import PropTypes from "prop-types";
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, goerli],
+  [mainnet, polygon, optimism, arbitrum, goerli,bsc,bscTestnet],
   [
     infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_API }),
     publicProvider(),
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
       autoHideDuration={3000}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "right",
+        horizontal: "left",
       }}
     >
       <WagmiConfig client={wagmiClient}>
